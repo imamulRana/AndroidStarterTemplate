@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.serialization)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -39,27 +40,21 @@ android {
 
 dependencies {
     implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.graphics)
-    implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    //compose
+    implementation(libs.bundles.compose)
 
     //network
     implementation(platform(libs.ktor.bom))
-    implementation(libs.ktor.client.core)
-    implementation(libs.ktor.client.okhttp)
-    implementation(libs.ktor.client.content.negotiation)
-
-    /* this shit is only needed for ktor serialization to work &
-    we need another library in order to access full json feature */
-    implementation(libs.ktor.serialization.kotlinx.json)
+    implementation(libs.bundles.ktor)
 
     //hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
+
+    //navigation3
+    implementation(libs.bundles.navigation3)
 
     // test
     testImplementation(libs.junit)
