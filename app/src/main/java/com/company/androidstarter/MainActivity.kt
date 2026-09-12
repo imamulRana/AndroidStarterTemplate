@@ -5,9 +5,15 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SmallFloatingActionButton
+import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.company.androidstarter.core.ui.theme.AndroidStarterTheme
+import com.company.androidstarter.feature.paging.PagingTest
+import com.company.androidstarter.feature.paging.PagingTestViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,9 +22,19 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val viewmodel = viewModel<PagingTestViewModel>()
+
             AndroidStarterTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    innerPadding
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    floatingActionButton = {
+                        SmallFloatingActionButton(onClick = {
+                            viewmodel.patchComment(128,"U r really pretty")
+                        }) {
+                            Text(text = "Update")
+                        }
+                    }) { innerPadding ->
+                    PagingTest(modifier = Modifier.padding(innerPadding), viewModel = viewmodel)
                 }
             }
         }

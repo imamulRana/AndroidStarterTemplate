@@ -56,6 +56,9 @@ dependencies {
     //navigation3
     implementation(libs.bundles.navigation3)
 
+    // paging
+    implementation(libs.bundles.paging)
+
     // test
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
